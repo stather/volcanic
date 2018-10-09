@@ -17,29 +17,6 @@ import gql from "graphql-tag";
 const Device = require('twilio-client').Device;
 
 
-//const CosmosClient = require('@azure/cosmos').CosmosClient;
-//const config = require('../../cosmos/config');
-//const url = require('url');
-
-//const endpoint = config.endpoint;
-//const masterKey = config.primaryKey;
-//const HttpStatusCodes = { NOTFOUND: 404 };
-
-//const databaseId = config.database.id;
-//const containerId = config.container.id;
-
-//const client = new CosmosClient({ endpoint: endpoint, auth: { masterKey: masterKey } });
-
-// async function createDatabase() {
-//   const { database } = await client.databases.createIfNotExists({ id: databaseId });
-//   console.log(`Created database:\n${database.id}\n`);
-// }
-
-// async function readDatabase() {
-//     const { body: databaseDefinition } = await client.database(databaseId).read();
-//     console.log(`Reading database:\n${databaseDefinition.id}\n`);
-// }
-
 export class DefaultPage extends Component {
   static propTypes = {
     agentDesktop: PropTypes.object.isRequired,
@@ -49,16 +26,6 @@ export class DefaultPage extends Component {
   componentDidMount() {
     var self = this;
     var a;
-
-    // createDatabase()
-    //     .then(() => readDatabase())
-    //     .then(() => {  
-    //       var b = 3;
-    //     })
-    //     .catch((error) => { 
-    //       var a = 2;
-    //      });
-
 
     const options = { method: 'POST' };
     fetch('https://azure-chinook-6852.twil.io/capability-token', options)
