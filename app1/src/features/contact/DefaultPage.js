@@ -7,6 +7,19 @@ import ContactForm from './ContactForm'
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 
+// input ContactInput {
+//   firstName: String!
+//   lastName: String!
+//   email: String!
+// }
+
+const ADD_CONTACT = gql`
+  mutation AddContact($contact: ContactInput!){
+    addContact(contact: $contact){
+      id
+    }
+  }
+`;
 
 const ADD_TODO = gql`
   mutation AddTodo($type: String!) {
@@ -29,16 +42,16 @@ submit = (values) => {
 
   render() {
     return (
-      <Mutation mutation={ADD_TODO} onCompleted={data => {
+      <Mutation mutation={ADD_CONTACT} onCompleted={data => {
         var d = 27;
       }}>
-      {(addTodo, { data }) => (
+      {(addContact, { data }) => (
         <div>
         <ContactForm onSubmit={values => {
-          addTodo({ variables: { type: 'fred'}});
+          addContact({ variables: { contact: {firstName: values.firstName, lastName: values.lastName, email: values.email}}});
         }}>
         </ContactForm>
-        {data && <p>{data.addTodo.id}</p>}
+        {data && <p>{data.addContact.id}</p>}
         </div>
 
       )}

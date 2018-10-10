@@ -23,6 +23,13 @@ async function readDatabase() {
   console.log(`Reading database:\n${databaseDefinition.id}\n`);
 }
 
+async function addContact(contact){
+
+  const { result: results } = await client.database(databaseId).container(containerId).items.create(contact);
+  return results;
+
+}
+
 async function queryContainer() {
   console.log(`Querying container:\n${config.container.id}`);
 
@@ -54,6 +61,8 @@ const books = [
     author: 'Michael Crichton',
   },
 ];
+
+const todo = { id: 'abc', type: 'def' };
 
 const customers = [
   {
@@ -87,6 +96,30 @@ const typeDefs = gql`
     customers: [Customer]
   }
 
+  type Todo {
+    id: String
+    type: String
+  }
+
+  type Mutation {
+    addTodo(type: String) : Todo
+    addContact(contact: ContactInput) : Contact
+    }
+
+   input ContactInput {
+       firstName: String!
+       lastName: String!
+       email: String!
+     }
+
+     type Contact {
+       id: String
+       firstName: String!
+       lastName: String!
+       email: String!
+         }
+
+
 
 `;
 
@@ -112,13 +145,20 @@ const resolvers = {
       return getData();
     },
     customers: () => customers,
-    Mutation: {
-      addTodo: (source, args, context, info) => {
-        var a = 27;
-        return todo;
-      },
-    }
   },
+  Mutation: {
+    addTodo: (source, args, context, info) => {
+      var a = 27;
+      return todo;
+    },
+  },
+  Mutation: {
+    addContact: (source, args, context, info) => {
+      var a = 27;
+      addContact(args);
+      return todo;    
+    }
+  }
 };
 
 // In the most basic sense, the ApolloServer can be started
