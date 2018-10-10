@@ -4,6 +4,8 @@ import homeReducer from '../features/home/redux/reducer';
 import commonReducer from '../features/common/redux/reducer';
 import examplesReducer from '../features/examples/redux/reducer';
 import agentDesktopReducer from '../features/agent-desktop/redux/reducer';
+import { reducer as formReducer } from 'redux-form'
+import contactReducer from '../features/contact/redux/reducer';
 
 // NOTE 1: DO NOT CHANGE the 'reducerMap' name and the declaration pattern.
 // This is used for Rekit cmds to register new features, remove features, etc.
@@ -16,6 +18,7 @@ const reducerMap = {
   common: commonReducer,
   examples: examplesReducer,
   agentDesktop: agentDesktopReducer,
+  contact: contactReducer,
 };
 
-export default combineReducers(reducerMap);
+export default combineReducers({reducerMap, form: formReducer});
