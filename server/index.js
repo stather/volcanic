@@ -111,7 +111,13 @@ const resolvers = {
     books: () => {
       return getData();
     },
-    customers: () => customers
+    customers: () => customers,
+    Mutation: {
+      addTodo: (source, args, context, info) => {
+        var a = 27;
+        return todo;
+      },
+    }
   },
 };
 

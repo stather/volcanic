@@ -19,6 +19,8 @@ const reducerMap = {
   examples: examplesReducer,
   agentDesktop: agentDesktopReducer,
   contact: contactReducer,
+  form: formReducer,
 };
 
-export default combineReducers({reducerMap, form: formReducer});
+export default combineReducers(reducerMap);
+//export default combineReducers({reducerMap, form: formReducer});

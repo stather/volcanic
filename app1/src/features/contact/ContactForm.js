@@ -7,40 +7,28 @@ import Footer from 'grommet/components/Footer';
 import FormFields from 'grommet/components/FormFields';
 import FormField from 'grommet/components/FormField';
 import TextInput from 'grommet/components/TextInput';
+import Button from 'grommet/components/Button';
 
 class MyCustomInput extends Component {
   render() {
-    const { input: { value, onChange, label } } = this.props
+    const { input, label } = this.props;
+
+    var a = 27;
     return (
-          <FormField label={label}>
-      <TextInput value={value} defaultValue='val'/>
-    </FormField>
-      // <div>
-      //   <span>The current value is {value}.</span>
-      //   <button type="button" onClick={() => onChange(value + 1)}>Inc</button>
-      //   <button type="button" onClick={() => onChange(value - 1)}>Dec</button>
-      // </div>
+      <FormField label={label} {...input}>
+        <TextInput />
+      </FormField>
+
     )
   }
 }
-
-const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
-    <FormField label={label}>
-      <TextInput />
-    </FormField>
-  // <TextField hintText={label}
-  //   floatingLabelText={label}
-  //   errorText={touched && error}
-  //   {...input}
-  //   {...custom}
-  ///>
-)
 
 
 class ContactForm extends Component {
   static propTypes = {
 
   };
+
 
   render() {
     const { handleSubmit } = this.props;
@@ -56,14 +44,13 @@ class ContactForm extends Component {
             <Field name="firstName" component={MyCustomInput} type="text" label='First Name' />
           </div>
           <div>
-            <Field name="lastName" component={renderTextField} type="text" label='Last Name' />
+            <Field name="lastName" component={MyCustomInput} type="text" label='Last Name' />
           </div>
           <div>
-            <label htmlFor="email">Email</label>
-            <Field name="email" component="input" type="email" />
+            <Field name="email" component={MyCustomInput} type="email" label='Email' />
           </div>
           <Footer pad={{ "vertical": "medium" }}>
-            <button type="submit">Submit</button>
+            <Button type="submit" primary={true}>Submit</Button>
           </Footer>
         </FormFields>
       </Form>
