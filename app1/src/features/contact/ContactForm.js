@@ -5,52 +5,33 @@ import Header from 'grommet/components/Header';
 import Heading from 'grommet/components/Heading';
 import Footer from 'grommet/components/Footer';
 import FormFields from 'grommet/components/FormFields';
-import FormField from 'grommet/components/FormField';
-import TextInput from 'grommet/components/TextInput';
 import Button from 'grommet/components/Button';
-
-class MyCustomInput extends Component {
-  render() {
-    const { input, label } = this.props;
-
-    var a = 27;
-    return (
-      <FormField label={label} {...input}>
-        <TextInput />
-      </FormField>
-
-    )
-  }
-}
-
+import PlainTextInput from '../grommet/PlainTextInput';
 
 class ContactForm extends Component {
-  static propTypes = {
-
-  };
-
+  static propTypes = {};
 
   render() {
     const { handleSubmit } = this.props;
     return (
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className='contact-contact-form'>
         <Header>
-          <Heading>
-            Sample Header
-    </Heading>
+          <Heading>New Contact</Heading>
         </Header>
         <FormFields>
           <div>
-            <Field name="firstName" component={MyCustomInput} type="text" label='First Name' />
+            <Field name="firstName" component={PlainTextInput} type="text" label="First Name" />
           </div>
           <div>
-            <Field name="lastName" component={MyCustomInput} type="text" label='Last Name' />
+            <Field name="lastName" component={PlainTextInput} type="text" label="Last Name" />
           </div>
           <div>
-            <Field name="email" component={MyCustomInput} type="email" label='Email' />
+            <Field name="email" component={PlainTextInput} type="email" label="Email" />
           </div>
-          <Footer pad={{ "vertical": "medium" }}>
-            <Button type="submit" primary={true}>Submit</Button>
+          <Footer pad={{ vertical: 'medium' }}>
+            <Button type="submit" primary={true}>
+              Submit
+            </Button>
           </Footer>
         </FormFields>
       </Form>
@@ -58,9 +39,8 @@ class ContactForm extends Component {
   }
 }
 
-
 ContactForm = reduxForm({
-  form: 'contact' // a unique name for this form
+  form: 'contact', // a unique name for this form
 })(ContactForm);
 
 export default ContactForm;

@@ -6,6 +6,7 @@ import examplesReducer from '../features/examples/redux/reducer';
 import agentDesktopReducer from '../features/agent-desktop/redux/reducer';
 import { reducer as formReducer } from 'redux-form'
 import contactReducer from '../features/contact/redux/reducer';
+import grommetReducer from '../features/grommet/redux/reducer';
 
 // NOTE 1: DO NOT CHANGE the 'reducerMap' name and the declaration pattern.
 // This is used for Rekit cmds to register new features, remove features, etc.
@@ -20,6 +21,7 @@ const reducerMap = {
   agentDesktop: agentDesktopReducer,
   contact: contactReducer,
   form: formReducer,
+  grommet: grommetReducer,
 };
 
 export default combineReducers(reducerMap);
