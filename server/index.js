@@ -94,6 +94,7 @@ const typeDefs = gql`
   type Query {
     books: [Book]
     customers: [Customer]
+    contacts: [Contact]
   }
 
   type Todo {
