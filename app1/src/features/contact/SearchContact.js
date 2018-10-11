@@ -4,6 +4,20 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import SearchInput from 'grommet/components/SearchInput';
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
+
+
+const GET_CONTACTS = gql`
+  query getContacts($firstName: String!) {
+    contact(firstName: $firstName) {
+      id
+      firstName
+      lastName
+    }
+  }
+`;
+
 
 export class SearchContact extends Component {
   static propTypes = {
