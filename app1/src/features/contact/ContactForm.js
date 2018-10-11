@@ -7,7 +7,7 @@ import Footer from 'grommet/components/Footer';
 import FormFields from 'grommet/components/FormFields';
 import Button from 'grommet/components/Button';
 import PlainTextInput from '../grommet/PlainTextInput';
-import {cellNumber} from '../../validation/FieldValidation';
+import {cellNumber, email} from '../../validation/FieldValidation';
 
 
 
@@ -30,7 +30,7 @@ class ContactForm extends Component {
             <Field name="lastName" component={PlainTextInput} type="text" label="Last Name" />
           </div>
           <div>
-            <Field name="email" component={PlainTextInput} type="email" label="Email" />
+            <Field name="email" component={PlainTextInput} type="email" label="Email" validate={[email]}/>
           </div>
           <div>
             <Field name="mainCell" component={PlainTextInput} type="text" label="Cell" validate={[cellNumber]} />
