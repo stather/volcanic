@@ -4,3 +4,4 @@ export const appStates = {
   MOD_CONTACT_SEARCH: 2,
 };
 
+export const HOME_SHOW_SEARCH_CONTACT_PANEL = 'HOME_SHOW_SEARCH_CONTACT_PANEL';

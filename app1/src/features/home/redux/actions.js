@@ -1,0 +1,1 @@
+export { showSearchContactPanel } from './showSearchContactPanel';

@@ -1,6 +1,8 @@
 import initialState from './initialState';
+import { reducer as showSearchContactPanelReducer } from './showSearchContactPanel';
 
 const reducers = [
+  showSearchContactPanelReducer,
 ];
 
 export default function reducer(state = initialState, action) {
