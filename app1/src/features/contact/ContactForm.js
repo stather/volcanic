@@ -7,6 +7,10 @@ import Footer from 'grommet/components/Footer';
 import FormFields from 'grommet/components/FormFields';
 import Button from 'grommet/components/Button';
 import PlainTextInput from '../grommet/PlainTextInput';
+import {cellNumber} from '../../validation/FieldValidation';
+
+
+
 
 class ContactForm extends Component {
   static propTypes = {};
@@ -27,6 +31,9 @@ class ContactForm extends Component {
           </div>
           <div>
             <Field name="email" component={PlainTextInput} type="email" label="Email" />
+          </div>
+          <div>
+            <Field name="mainCell" component={PlainTextInput} type="text" label="Cell" validate={[cellNumber]} />
           </div>
           <Footer pad={{ vertical: 'medium' }}>
             <Button type="submit" primary={true}>
