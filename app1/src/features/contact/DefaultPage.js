@@ -41,6 +41,7 @@ export class DefaultPage extends Component {
                       firstName: values.firstName,
                       lastName: values.lastName,
                       email: values.email,
+                      cell: values.mainCell
                     },
                   },
                 });
