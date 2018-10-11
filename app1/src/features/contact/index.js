@@ -1,2 +1,3 @@
-export { default as DefaultPage } from './DefaultPage';
+export { default as AddContactPanel } from './AddContactPanel';
 export { default as ContactForm } from './ContactForm';
+export { default as SearchContact } from './SearchContact';

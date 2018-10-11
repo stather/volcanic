@@ -1,19 +1,19 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { DefaultPage } from '../../../src/features/contact/DefaultPage';
+import { SearchContact } from '../../../src/features/contact/SearchContact';
 
-describe('contact/DefaultPage', () => {
+describe('contact/SearchContact', () => {
   it('renders node with correct class name', () => {
     const props = {
       contact: {},
       actions: {},
     };
     const renderedComponent = shallow(
-      <DefaultPage {...props} />
+      <SearchContact {...props} />
     );
 
     expect(
-      renderedComponent.find('.contact-default-page').length
+      renderedComponent.find('.contact-search-contact').length
     ).toBe(1);
   });
 });

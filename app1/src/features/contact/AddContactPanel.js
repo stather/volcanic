@@ -16,7 +16,7 @@ const ADD_CONTACT = gql`
   }
 `;
 
-export class DefaultPage extends Component {
+export class AddContactPanel extends Component {
   static propTypes = {
     contact: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
@@ -73,4 +73,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(DefaultPage);
+)(AddContactPanel);

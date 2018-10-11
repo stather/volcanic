@@ -2,13 +2,13 @@
 // Learn more from: http://rekit.js.org/docs/routing.html
 
 import {
-  DefaultPage,
+  AddContactPanel,
 } from './';
 
 export default {
   path: 'contact',
   name: 'Contact',
   childRoutes: [
-    { path: 'default-page', name: 'Default page', component: DefaultPage, isIndex: true },
+    { path: 'add-contact-panel', name: 'Add contact panel', component: AddContactPanel, isIndex: true },
   ],
 };
