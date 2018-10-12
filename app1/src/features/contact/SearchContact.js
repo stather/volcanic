@@ -9,13 +9,15 @@ import gql from "graphql-tag";
 
 
 const GET_CONTACTS = gql`
-  query getContacts($firstName: String!) {
-    contact(firstName: $firstName) {
-      id
-      firstName
-      lastName
+query getcontacts($firstName: String){
+  contacts(firstName: $firstName) {
+    id 
+    contact {
+	    firstName
+    	lastName
     }
   }
+}
 `;
 
 
