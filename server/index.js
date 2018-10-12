@@ -92,7 +92,7 @@ const typeDefs = gql`
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
-    books: [Book]
+    books(title:String, author:String): [Book]
     customers: [Customer]
     contacts: [Contact]
   }
@@ -143,7 +143,7 @@ async function getData() {
 // schema.  We'll retrieve books from the "books" array above.
 const resolvers = {
   Query: {
-    books: () => {
+    books: (root, args, context, info) => {
       return getData();
     },
     customers: () => customers,
