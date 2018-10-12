@@ -30,16 +30,16 @@ async function addContact(contact){
 
 }
 
-async function queryContainer() {
+async function queryContainer(fname) {
   console.log(`Querying container:\n${config.container.id}`);
 
   // query to return all children in a family
   const querySpec = {
-    query: "SELECT c.id, c.data FROM c where contains(c.data, 'some')",
+    query: "SELECT c.contact, c.id FROM c where startswith(upper(c.contact.firstName), upper(@firstName))",
     parameters: [
       {
-        name: "@lastName",
-        value: "Andersen"
+        name: "@firstName",
+        value: fname
       }
     ]
   };
@@ -71,6 +71,14 @@ const customers = [
   }
 ];
 
+const contacts = [
+  {
+    firstName: 'Russell',
+    lastName: 'Stather',
+    id: '12345',
+  }
+];
+
 // Type definitions define the "shape" of your data and specify
 // which ways the data can be fetched from the GraphQL server.
 const typeDefs = gql`
@@ -94,7 +102,7 @@ const typeDefs = gql`
   type Query {
     books(title:String, author:String): [Book]
     customers: [Customer]
-    contacts: [Contact]
+    contacts(firstName: String): [Contact]
   }
 
   type Todo {
@@ -114,11 +122,15 @@ const typeDefs = gql`
        cell: String
      }
 
+     type cd {
+      firstName: String!
+      lastName: String!
+      email: String!
+   }
+
      type Contact {
        id: String
-       firstName: String!
-       lastName: String!
-       email: String!
+       contact: cd 
          }
 
 
@@ -147,6 +159,9 @@ const resolvers = {
       return getData();
     },
     customers: () => customers,
+    contacts: (root, args, context, info) => {
+        return queryContainer(args.firstName);
+    }
   },
   Mutation: {
     addTodo: (source, args, context, info) => {
