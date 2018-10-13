@@ -6,6 +6,7 @@ import * as actions from './redux/actions';
 import SearchInput from 'grommet/components/SearchInput';
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
+import { ApolloConsumer } from 'react-apollo';
 
 
 const GET_CONTACTS = gql`
@@ -27,10 +28,32 @@ export class SearchContact extends Component {
     actions: PropTypes.object.isRequired,
   };
 
+  state = { dog: null };
+
+  onContactsFetched = dog => this.setState(() => ({ dog }));
+
   render() {
     return (
       <div className="contact-search-contact">
-        <SearchInput placeHolder="Search" suggestions={['first', 'second', 'third', 'fourth']} />
+      <ApolloConsumer>
+        {client => (
+          <div>
+            {this.state.dog && <img src={this.state.dog.displayImage} />}
+            <button
+              onClick={async () => {
+                const { data } = await client.query({
+                  query: GET_CONTACTS,
+                  variables: { firstName: "rus" }
+                });
+                this.onContactsFetched(data.contacts);
+              }}
+            >
+              Click me!
+            </button>
+          </div>
+        )}
+      </ApolloConsumer>
+
       </div>
     );
   }

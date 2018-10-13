@@ -17,6 +17,7 @@ import gql from "graphql-tag";
 const Device = require('twilio-client').Device;
 
 
+
 export class DefaultPage extends Component {
   static propTypes = {
     agentDesktop: PropTypes.object.isRequired,
