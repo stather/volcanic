@@ -6,12 +6,17 @@ export default class PlainTextInput extends Component {
   static propTypes = {};
 
   render() {
-    const { input, label, meta: { touched, error, warning } } = this.props;
+    const {
+      input,
+      label,
+      meta: { touched, error, warning },
+    } = this.props;
 
     return (
-      <div className='grommet-plain-text-input'>
+      <div className="grommet-plain-text-input">
+ 
         <FormField label={label} {...input} error={error}>
-          <TextInput  />
+          <TextInput />
         </FormField>
       </div>
     );

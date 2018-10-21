@@ -9,9 +9,6 @@ import Button from 'grommet/components/Button';
 import PlainTextInput from '../grommet/PlainTextInput';
 import {cellNumber, email} from '../../validation/FieldValidation';
 
-
-
-
 class ContactForm extends Component {
   static propTypes = {};
 

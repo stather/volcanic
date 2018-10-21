@@ -28,32 +28,24 @@ export class SearchContact extends Component {
     actions: PropTypes.object.isRequired,
   };
 
-  state = { dog: null };
-
-  onContactsFetched = dog => this.setState(() => ({ dog }));
 
   render() {
     return (
       <div className="contact-search-contact">
-      <ApolloConsumer>
-        {client => (
+      <Query query={GET_CONTACTS} variables={{ firstName: "rus" }}>
+      {({loading,error,data}) => {
+        if (loading) return null;
+        if (error) return `Error!: ${error}`;
+        return (
           <div>
-            {this.state.dog && <img src={this.state.dog.displayImage} />}
-            <button
-              onClick={async () => {
-                const { data } = await client.query({
-                  query: GET_CONTACTS,
-                  variables: { firstName: "rus" }
-                });
-                this.onContactsFetched(data.contacts);
-              }}
-            >
-              Click me!
-            </button>
+            {data.contacts.map(contact =>(
+              <div className="contact" key={contact.id}>{contact.id}</div>
+            ))}
           </div>
-        )}
-      </ApolloConsumer>
-
+        );
+      }
+      }
+      </Query>
       </div>
     );
   }
