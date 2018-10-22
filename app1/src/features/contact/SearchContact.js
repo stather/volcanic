@@ -6,8 +6,6 @@ import * as actions from './redux/actions';
 import SearchInput from 'grommet/components/SearchInput';
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-import { ApolloConsumer } from 'react-apollo';
-
 
 const GET_CONTACTS = gql`
 query getcontacts($firstName: String){
