@@ -4,21 +4,21 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 import SearchInput from 'grommet/components/SearchInput';
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+import Search from 'grommet/components/Search';
 
 const GET_CONTACTS = gql`
-query getcontacts($firstName: String){
-  contacts(firstName: $firstName) {
-    id 
-    contact {
-	    firstName
-    	lastName
+  query getcontacts($firstName: String) {
+    contacts(firstName: $firstName) {
+      id
+      contact {
+        firstName
+        lastName
+      }
     }
   }
-}
 `;
-
 
 export class SearchContact extends Component {
   static propTypes = {
@@ -27,23 +27,38 @@ export class SearchContact extends Component {
   };
 
 
+
+  componentDidMount() {
+    this.val = this.props.contact.val;
+  }
+
   render() {
     return (
       <div className="contact-search-contact">
-      <Query query={GET_CONTACTS} variables={{ firstName: "rus" }}>
-      {({loading,error,data}) => {
-        if (loading) return null;
-        if (error) return `Error!: ${error}`;
-        return (
-          <div>
-            {data.contacts.map(contact =>(
-              <div className="contact" key={contact.id}>{contact.id}</div>
-            ))}
-          </div>
-        );
-      }
-      }
-      </Query>
+        <Search
+          placeHolder="Search"
+          inline={true}
+          size="medium"
+          onDOMChange={event => {
+            this.props.actions.searchForContacts(event.target.value);
+          }}
+        />
+        <Query name='myquery' query={GET_CONTACTS} variables={{ firstName: this.props.contact.val }}>
+          {({ loading, error, data, refetch }) => {
+            this.fred = refetch;
+            if (loading) return null;
+            if (error) return `Error!: ${error}`;
+            return (
+              <div>
+                {data.contacts.map(contact => (
+                  <div className="contact" key={contact.id}>
+                    {contact.id}
+                  </div>
+                ))}
+              </div>
+            );
+          }}
+        </Query>
       </div>
     );
   }

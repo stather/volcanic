@@ -8,9 +8,11 @@
 
 import initialState from './initialState';
 import { reducer as showAddContactPanelReducer } from './showAddContactPanel';
+import { reducer as searchForContactsReducer } from './searchForContacts';
 
 const reducers = [
   showAddContactPanelReducer,
+  searchForContactsReducer,
 ];
 
 export default function reducer(state = initialState, action) {
