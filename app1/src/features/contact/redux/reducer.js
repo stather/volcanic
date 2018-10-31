@@ -9,10 +9,14 @@
 import initialState from './initialState';
 import { reducer as showAddContactPanelReducer } from './showAddContactPanel';
 import { reducer as searchForContactsReducer } from './searchForContacts';
+import { reducer as contactSelectedReducer } from './contactSelected';
+import { reducer as contactsLoadedReducer } from './contactsLoaded';
 
 const reducers = [
   showAddContactPanelReducer,
   searchForContactsReducer,
+  contactSelectedReducer,
+  contactsLoadedReducer,
 ];
 
 export default function reducer(state = initialState, action) {

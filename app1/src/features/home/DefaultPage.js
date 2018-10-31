@@ -8,6 +8,7 @@ import * as actions from './redux/actions';
 import { appStates } from './redux/constants';
 import AddContactPanel from '../contact/AddContactPanel';
 import SearchContactPanel from '../contact/SearchContactPanel';
+import EditContactPanel from '../contact/EditContactPanel';
 import Split from 'grommet/components/Split';
 import Sidebar from 'grommet/components/Sidebar';
 import Menu from 'grommet/components/Menu';
@@ -42,6 +43,7 @@ export class DefaultPage extends Component {
           </Sidebar>
           {this.props.home.module === appStates.MOD_CONTACT && <AddContactPanel />}
           {this.props.home.module === appStates.MOD_CONTACT_SEARCH && <SearchContactPanel />}
+          {this.props.home.module === appStates.MOD_CONTACT_EDIT && <EditContactPanel />}
         </Split>
       </div>
     );

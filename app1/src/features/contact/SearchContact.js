@@ -6,8 +6,7 @@ import * as actions from './redux/actions';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Search from 'grommet/components/Search';
-import Table from 'grommet/components/Table';
-import TableRow from 'grommet/components/TableRow';
+import ContactList from './ContactList';
 
 const GET_CONTACTS = gql`
   query getcontacts($firstName: String) {
@@ -50,24 +49,7 @@ export class SearchContact extends Component {
             if (error) return `Error!: ${error}`;
             return (
               <div>
-                <Table>
-                  <thead>
-                    <tr>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Email</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data.contacts.map(contact => (
-                      <TableRow key={contact.id}>
-                        <td>{contact.contact.firstName}</td>
-                        <td>{contact.contact.lastName}</td>
-                        <td>{contact.contact.email}</td>
-                      </TableRow>
-                    ))}
-                  </tbody>
-                </Table>
+                <ContactList contacts={data.contacts} />
               </div>
             );
           }}
