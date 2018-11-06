@@ -66,71 +66,21 @@ async function findContactById(id) {
   return results[0];
 };
 
-// This is a (sample) collection of books we'll be able to query
-// the GraphQL server for.  A more complete example might fetch
-// from an existing data source like a REST API or database.
-const books = [
-  {
-    title: 'Harry Potter and the Chamber of Secrets',
-    author: 'J.K. Rowling',
-  },
-  {
-    title: 'Jurassic Park',
-    author: 'Michael Crichton',
-  },
-];
-
-const todo = { id: 'abc', type: 'def' };
-
-const customers = [
-  {
-    firstName: 'Russell',
-    surname: 'Stather'
-  }
-];
-
-const contacts = [
-  {
-    firstName: 'Russell',
-    lastName: 'Stather',
-    id: '12345',
-  }
-];
 
 // Type definitions define the "shape" of your data and specify
 // which ways the data can be fetched from the GraphQL server.
 const typeDefs = gql`
   # Comments in GraphQL are defined with the hash (#) symbol.
 
-  # This "Book" type can be used in other type declarations.
-  type Book {
-    title: String
-    author: String
-  }
-
-  type Customer {
-    firstName: String
-    surname: String
-    title: String
-    books: [Book]
-  }
-
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
-    books(title:String, author:String): [Book]
-    customers: [Customer]
     contacts(firstName: String): [Contact]
     contact(id: String): Contact
   }
 
-  type Todo {
-    id: String
-    type: String
-  }
 
   type Mutation {
-    addTodo(type: String) : Todo
     addContact(contact: ContactInput) : Contact
     }
 
@@ -157,28 +107,11 @@ const typeDefs = gql`
 
 `;
 
-async function getData() {
-
-  try {
-    var r = await queryContainer();
-    var c = 4;
-  } catch (error) {
-    var b = 3;
-    throw new ApolloError("something went wrong", "12345");
-  }
-
-
-  return books;
-}
 
 // Resolvers define the technique for fetching the types in the
 // schema.  We'll retrieve books from the "books" array above.
 const resolvers = {
   Query: {
-    books: (root, args, context, info) => {
-      return getData();
-    },
-    customers: () => customers,
     contacts: (root, args, context, info) => {
         return queryContainer(args.firstName);
     },
