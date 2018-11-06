@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import Form from 'grommet/components/Form';
 import Header from 'grommet/components/Header';
@@ -13,11 +14,11 @@ class ContactForm extends Component {
   static propTypes = {};
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, title } = this.props;
     return (
       <Form onSubmit={handleSubmit} className='contact-contact-form'>
         <Header>
-          <Heading>New Contact</Heading>
+          <Heading>{title}</Heading>
         </Header>
         <FormFields>
           <div>
@@ -46,5 +47,13 @@ class ContactForm extends Component {
 ContactForm = reduxForm({
   form: 'contact', // a unique name for this form
 })(ContactForm);
+
+
+ContactForm = connect(
+  /*
+  state => ({
+    initialValues: this.props.initialValues
+  }),*/
+)(ContactForm)
 
 export default ContactForm;

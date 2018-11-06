@@ -24,34 +24,36 @@ export class AddContactPanel extends Component {
 
   render() {
     return (
-      <Mutation
-        mutation={ADD_CONTACT}
-        onCompleted={data => {
-          var d = 27;
-        }}
-      >
-        {(addContact, { data }) => (
-          <div>
-          <Section>
-            <ContactForm
-              onSubmit={values => {
-                addContact({
-                  variables: {
-                    contact: {
-                      firstName: values.firstName,
-                      lastName: values.lastName,
-                      email: values.email,
-                      cell: values.mainCell
-                    },
-                  },
-                });
-              }}
-            />
-            {data && <p>{data.addContact.id}</p>}
-            </Section>
-          </div>
-        )}
-      </Mutation>
+      <div className="contact-add-contact-panel">
+        <Mutation
+          mutation={ADD_CONTACT}
+          onCompleted={data => {
+            var d = 27;
+          }}
+        >
+          {(addContact, { data }) => (
+            <div>
+              <Section>
+                <ContactForm title='New Contact'
+                  onSubmit={values => {
+                    addContact({
+                      variables: {
+                        contact: {
+                          firstName: values.firstName,
+                          lastName: values.lastName,
+                          email: values.email,
+                          cell: values.mainCell,
+                        },
+                      },
+                    });
+                  }}
+                />
+                {data && <p>{data.addContact.id}</p>}
+              </Section>
+            </div>
+          )}
+        </Mutation>
+      </div>
     );
   }
 }

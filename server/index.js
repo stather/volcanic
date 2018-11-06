@@ -48,6 +48,24 @@ async function queryContainer(fname) {
   return results;
 };
 
+async function findContactById(id) {
+  console.log(`Querying container:\n${config.container.id}`);
+
+  // query to return all children in a family
+  const querySpec = {
+    query: "SELECT c.contact, c.id FROM c where c.id = @id",
+    parameters: [
+      {
+        name: "@id",
+        value: id
+      }
+    ]
+  };
+
+  const { result: results } = await client.database(databaseId).container(containerId).items.query(querySpec).toArray();
+  return results[0];
+};
+
 // This is a (sample) collection of books we'll be able to query
 // the GraphQL server for.  A more complete example might fetch
 // from an existing data source like a REST API or database.
@@ -103,6 +121,7 @@ const typeDefs = gql`
     books(title:String, author:String): [Book]
     customers: [Customer]
     contacts(firstName: String): [Contact]
+    contact(id: String): Contact
   }
 
   type Todo {
@@ -162,6 +181,9 @@ const resolvers = {
     customers: () => customers,
     contacts: (root, args, context, info) => {
         return queryContainer(args.firstName);
+    },
+    contact:(root, args, context, info) => {
+      return findContactById(args.id);
     }
   },
   Mutation: {

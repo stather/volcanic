@@ -16,7 +16,7 @@ export default class PlainTextInput extends Component {
       <div className="grommet-plain-text-input">
  
         <FormField label={label} {...input} error={error}>
-          <TextInput />
+          <TextInput value={input.value}/>
         </FormField>
       </div>
     );
