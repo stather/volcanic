@@ -30,6 +30,14 @@ async function addContact(contact){
 
 }
 
+async function updateContact(contact){
+  let oldContactItem = await client.database(databaseId).container(containerId).item(contact.id);
+  let oldContactDef = await oldContactItem.read();
+  oldContactDef.body.contact = contact.contact;
+  let newtemDef = await client.database(databaseId).container(containerId).item(contact.id).replace(oldContactDef.body);
+  return newtemDef.body;
+}
+
 async function queryContainer(fname) {
   console.log(`Querying container:\n${config.container.id}`);
 
@@ -82,6 +90,7 @@ const typeDefs = gql`
 
   type Mutation {
     addContact(contact: ContactInput) : Contact
+    updateContact(id: String, contact: ContactInput) : Contact
     }
 
    input ContactInput {
@@ -120,16 +129,15 @@ const resolvers = {
     }
   },
   Mutation: {
-    addTodo: (source, args, context, info) => {
-      var a = 27;
-      return todo;
-    },
-  },
-  Mutation: {
     addContact: (source, args, context, info) => {
       var a = 27;
-      addContact(args);
-      return todo;    
+      let res = addContact(args);
+      return res;    
+    },
+    updateContact: async (source, args, context, info) => {
+      var b = 27;
+      let res = await updateContact(args);
+      return res;
     }
   }
 };

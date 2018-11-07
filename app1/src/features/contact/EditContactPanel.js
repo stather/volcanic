@@ -8,10 +8,15 @@ import gql from 'graphql-tag';
 import { Mutation, Query } from 'react-apollo';
 import Section from 'grommet/components/Section';
 
-const EDIT_CONTACT = gql`
-  mutation EditContact($contact: ContactInput!) {
-    editContact(contact: $contact) {
+const UPDATE_CONTACT = gql`
+  mutation UpdateContact($id: String!, $contact: ContactInput!) {
+    updateContact(id: $id, contact: $contact) {
       id
+      contact{
+        firstName
+        lastName
+        email
+      }
     }
   }
 `;
@@ -39,12 +44,12 @@ export class EditContactPanel extends Component {
     return (
       <div className="contact-edit-contact-panel">
         <Mutation
-          mutation={EDIT_CONTACT}
+          mutation={UPDATE_CONTACT}
           onCompleted={data => {
             var d = 27;
           }}
         >
-          {(addContact, { data }) => (
+          {(updateContact, { data }) => (
             <div>
               <Section>
                 <Query
@@ -61,8 +66,9 @@ export class EditContactPanel extends Component {
                         <ContactForm initialValues={{...data.contact.contact,id:data.contact.id}}
                           title="Edit Contact"
                           onSubmit={values => {
-                            addContact({
+                            updateContact({
                               variables: {
+                                id: data.contact.id,
                                 contact: {
                                   firstName: values.firstName,
                                   lastName: values.lastName,
